@@ -234,16 +234,6 @@ final class LoopDataManager {
 
     fileprivate var carbsOnBoard: CarbValue?
 
-    fileprivate var requiredCarbs: HKQuantity? {
-        didSet {
-            let number = settings.freeAPSSettings.showRequiredCarbsOnAppBadge
-                ? requiredCarbs?.doubleValue(for: .gram()) ?? 0 : 0
-            DispatchQueue.main.async {
-                UIApplication.shared.applicationIconBadgeNumber = Int(number)
-            }
-        }
-    }
-
     var basalDeliveryState: PumpManagerStatus.BasalDeliveryState? {
         get {
             return lockedBasalDeliveryState.value
@@ -436,18 +426,6 @@ extension LoopDataManager {
     /// The insulin sensitivity schedule, applying recent overrides relative to the current moment in time.
     var insulinSensitivityScheduleApplyingOverrideHistory: InsulinSensitivitySchedule? {
         return carbStore.insulinSensitivityScheduleApplyingOverrideHistory
-    }
-
-    /// The carb sensitivity schedule, applying recent overrides relative to the current moment in time.
-    /// This is measured in <blood glucose>/gram
-    var carbSensitivityScheduleApplyingOverrideHistory: CarbSensitivitySchedule? {
-        guard let crSchedule = carbRatioScheduleApplyingOverrideHistory,
-            let isfSchedule = insulinSensitivityScheduleApplyingOverrideHistory
-        else {
-            return nil
-        }
-
-        return .carbSensitivitySchedule(insulinSensitivitySchedule: isfSchedule, carbRatioSchedule: crSchedule)
     }
 
     /// Sets a new time zone for a the schedule-based settings
@@ -922,8 +900,6 @@ extension LoopDataManager {
                 throw error
             }
         }
-
-        updateRequiredCarbs()
     }
 
     private func notify(forChange context: LoopUpdateContext) {
@@ -1556,28 +1532,6 @@ extension LoopDataManager {
                 }
             }
         }
-    }
-
-    func updateRequiredCarbs() {
-        dispatchPrecondition(condition: .onQueue(dataAccessQueue))
-        guard
-            let unit = glucoseStore.preferredUnit,
-            let predictedGlucose = self.predictedGlucose?.last,
-            let csfSchedule = carbSensitivityScheduleApplyingOverrideHistory,
-            let glucoseTargetRange = settings.glucoseTargetRangeScheduleApplyingOverrideIfActive
-        else {
-            requiredCarbs = nil
-            return
-        }
-        let delta = glucoseTargetRange.minQuantity(at: predictedGlucose.startDate).doubleValue(for: unit)
-            - predictedGlucose.quantity.doubleValue(for: unit)
-        guard delta > 0 else {
-            requiredCarbs = nil
-            return
-        }
-
-        let now = Date()
-        requiredCarbs = HKQuantity(unit: .gram(), doubleValue: delta / csfSchedule.value(at: now))
     }
 }
 
