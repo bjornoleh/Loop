@@ -14,7 +14,7 @@ extension NumberFormatter {
     func string(fromBolusValue bolusValue: Double) -> String {
         switch bolusValue {
         case let x where x < 1:
-            minimumFractionDigits = 3
+            minimumFractionDigits = 2
         case let x where x < 10:
             minimumFractionDigits = 2
         default:
