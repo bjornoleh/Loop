@@ -233,7 +233,7 @@ private extension BolusInterfaceController {
         case let bolus where bolus > 1:
             return Int((bolus - 1.0) * 20) + pickerValueFromBolusValue(1)
         default:
-            return Int(bolusValue * 40)
+            return Int(bolusValue * 20)
         }
     }
 
@@ -244,7 +244,7 @@ private extension BolusInterfaceController {
         case let picker where picker > 40:
             return Double(picker - 40) / 20.0 + bolusValueFromPickerValue(40)
         default:
-            return Double(pickerValue) / 40.0
+            return Double(pickerValue) / 20.0
         }
     }
 
