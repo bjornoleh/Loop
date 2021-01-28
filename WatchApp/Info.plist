@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>174</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>com.loopkit.Loop.AddCarbEntryOnWatch</string>
