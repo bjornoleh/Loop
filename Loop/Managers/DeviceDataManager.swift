@@ -653,7 +653,7 @@ extension DeviceDataManager: LoopDataManagerDelegate {
         guard let pumpManager = pumpManager else {
             return unitsPerHour
         }
-        
+
         return pumpManager.roundToSupportedBasalRate(unitsPerHour: unitsPerHour)
     }
 

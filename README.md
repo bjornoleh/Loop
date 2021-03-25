@@ -1,3 +1,8 @@
+# Attention please!
+
+Dear friends! The FreeAPS project is frozen. All the forces of our team are aimed at developing a new project FreeAPS X based on OpenAPS. If you would like to continue developing this project, please fork.
+
+
 # Loop for iOS
 
 ![App Icon](/Loop/DefaultAssets.xcassets/AppIcon.appiconset/Icon-Small-40%402x.png?raw=true)
