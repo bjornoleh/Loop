@@ -30,6 +30,12 @@ extension ExponentialInsulinModelPreset {
             return NSLocalizedString("Rapid-Acting – Children", comment: "Title of insulin model preset")
         case .fiasp:
             return NSLocalizedString("Fiasp", comment: "Title of insulin model preset")
+        case .fiasp_7t:
+            return "Fiasp 7t"
+        case .fiasp_8t:
+            return  "Fiasp 8t"
+        case .lyumjev:
+            return "Lyumjev"
         }
     }
 

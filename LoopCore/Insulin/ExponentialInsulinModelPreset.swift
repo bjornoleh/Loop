@@ -12,10 +12,13 @@ public enum ExponentialInsulinModelPreset: String {
     case humalogNovologAdult
     case humalogNovologChild
     case fiasp
+    case fiasp_7t
+    case fiasp_8t
+    case lyumjev
 }
 
 
-// MARK: - Model generation
+// MARK: - Model generation - 2021-06-17: Added fiasp 7h + 8h, and lyumjev
 extension ExponentialInsulinModelPreset {
     var actionDuration: TimeInterval {
         switch self {
@@ -25,6 +28,12 @@ extension ExponentialInsulinModelPreset {
             return .minutes(360)
         case .fiasp:
             return .minutes(360)
+        case .fiasp_7t:
+            return .minutes(420)
+        case .fiasp_8t:
+            return .minutes(480)
+        case .lyumjev:
+            return .minutes(300)
         }
     }
 
@@ -36,6 +45,12 @@ extension ExponentialInsulinModelPreset {
             return .minutes(65)
         case .fiasp:
             return .minutes(55)
+        case .fiasp_7t:
+            return .minutes(55)
+        case .fiasp_8t:
+            return .minutes(55)
+        case .lyumjev:
+            return .minutes(60)
         }
     }
     
@@ -47,6 +62,12 @@ extension ExponentialInsulinModelPreset {
             return .minutes(10)
         case .fiasp:
             return .minutes(10)
+        case .fiasp_7t:
+            return .minutes(10)
+        case .fiasp_8t:
+            return .minutes(10)
+        case .lyumjev:
+            return .minutes(5)
         }
     }
 

@@ -59,10 +59,12 @@ class InsulinModelSettingsViewController: ChartsTableViewController, Identifiabl
     fileprivate let walshModelIndex = 0
 
     private var allModels: [InsulinModel] = [
-        WalshInsulinModel(actionDuration: .hours(6)),
+       // WalshInsulinModel(actionDuration: .hours(6)),
         ExponentialInsulinModelPreset.humalogNovologAdult,
         ExponentialInsulinModelPreset.humalogNovologChild,
-        ExponentialInsulinModelPreset.fiasp
+        ExponentialInsulinModelPreset.fiasp,
+        ExponentialInsulinModelPreset.fiasp_7t,
+        ExponentialInsulinModelPreset.fiasp_8t
     ]
 
     private var selectedModelIndex: Int? {
@@ -72,7 +74,7 @@ class InsulinModelSettingsViewController: ChartsTableViewController, Identifiabl
         case is WalshInsulinModel:
             return walshModelIndex
         case let selectedModel as ExponentialInsulinModelPreset:
-            for index in 1..<allModels.count {
+            for index in 0..<allModels.count {
                 if selectedModel == (allModels[index] as! ExponentialInsulinModelPreset) {
                     return index
                 }
